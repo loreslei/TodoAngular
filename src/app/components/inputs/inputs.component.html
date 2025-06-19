@@ -1,1 +1,64 @@
-<p>inputs works!</p>
+<div class="w-screen flex justify-center">
+    <div class="w-40/100 flex flex-col justify-center align-center bg-white shadow-md rounded-lg space-y-6 p-5 pb-8">
+        <h1 class="text-xl text-center text-slate-800 font-semibold">Adicione uma Tarefa</h1>
+        <form action="">
+            <div class="text-slate-600/80  flex flex-col justify-center align-center space-y-4">
+                <div class="flex flex-col mx-auto w-56 space-y-1">
+                    <label class="text-slate-700 font-semibold" for="tarefa">Tarefa</label>
+                    <div class="w-full relative">
+                        <div class="absolute left-2 top-1.5 h-5 w-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-clipboard-list-icon lucide-clipboard-list">
+                                <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+                                <path d="M12 11h4" />
+                                <path d="M12 16h4" />
+                                <path d="M8 11h.01" />
+                                <path d="M8 16h.01" />
+                            </svg>
+                        </div>
+
+                        <input type="text" required
+                            class="pl-9 p-1 w-full border-1 border-slate-400/40 rounded focus:outline-indigo-500 "
+                            name="tarefa" placeholder="Fazer dever">
+                    </div>
+                </div>
+
+                <div class="flex flex-col mx-auto w-56 space-y-1">
+                    <label class="text-slate-700 font-semibold" for="status">Status</label>
+                    <div class="w-full relative custom-select-wrapper">
+                        <div class="absolute left-2 top-1.5 h-5 w-5 pointer-events-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-circle-check-icon lucide-circle-check">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="m9 12 2 2 4-4" />
+                            </svg>
+                        </div>
+
+                        <select
+                            class="pl-9 p-1 border-1 border-slate-400/40 rounded w-full focus:outline-indigo-500 custom-select"
+                            name="status" id="status">
+                            <option value="Pendente">Pendente</option>
+                            <option value="Em Andamento">Em Andamento</option>
+                            <option value="Concluído">Concluído</option>
+                        </select>
+
+                        <div class="absolute right-2 top-1.5 h-5 w-5 pointer-events-none custom-arrow-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down">
+                                <path d="m6 9 6 6 6-6" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit"
+                    class="bg-pink-100 w-50 mx-auto mt-2
+                border-1 border-pink-400 h-10 text-pink-500 px-3 rounded transition duration-300 cursor-pointer hover:border-pink-500 hover:bg-pink-200 text-sm">Adicionar</button>
+            </div>
+        </form>
+    </div>
+</div>
