@@ -1,29 +1,30 @@
+.custom-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: none;
+}
 
-    .custom-select {
-        -webkit-appearance: none; 
-        -moz-appearance: none; 
-        appearance: none; 
-        background-image: none; 
-    }
+.custom-select-wrapper {
+  position: relative;
+}
 
-    .custom-select-wrapper {
-        position: relative;
-    }
+.pointer-events-none {
+  pointer-events: none;
+}
 
-    .pointer-events-none {
-        pointer-events: none;
-    }
+.custom-arrow-icon {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
 
-  
-    .custom-arrow-icon {
-        position: absolute;
-        right: 8px;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 1;
-    }
+.custom-select {
+  padding-right: 30px;
+}
 
-   
-    .custom-select {
-        padding-right: 30px; 
-    }
+input:-webkit-autofill {
+  transition: background-color 100000s ease-in-out 0s;
+}
