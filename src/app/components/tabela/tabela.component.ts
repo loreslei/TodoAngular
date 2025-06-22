@@ -1,6 +1,7 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AlertaComponent } from "../alert/alert.component";
+import { AlertaComponent } from '../alert/alert.component';
+import { TarefaService, Tarefa } from '../../services/tarefa.service';
 
 @Component({
   selector: 'app-tabela',
@@ -9,26 +10,36 @@ import { AlertaComponent } from "../alert/alert.component";
   templateUrl: './tabela.component.html',
   styleUrls: ['./tabela.component.css'],
 })
-export class TabelaComponent {
-  tarefas = [
-    { id: 1, descricao: 'Tarefa 1', status: 'Concluído' },
-    { id: 2, descricao: 'Tarefa 2', status: 'Em Andamento' },
-    { id: 3, descricao: 'Tarefa 3', status: 'Pendente' },
-    { id: 4, descricao: 'Tarefa 4', status: 'Pendente' },
-    { id: 5, descricao: 'Tarefa 5', status: 'Em Andamento' },
-    { id: 6, descricao: 'Tarefa 6', status: 'Concluído' },
-    { id: 7, descricao: 'Tarefa 7', status: 'Em Andamento' },
-    { id: 8, descricao: 'Tarefa 8', status: 'Pendente' },
-    { id: 9, descricao: 'Tarefa 9', status: 'Pendente' },
-    { id: 10, descricao: 'Tarefa 10', status: 'Concluído' },
-  ];
-
+export class TabelaComponent implements OnInit{
   statusOptions = ['Pendente', 'Em Andamento', 'Concluído'];
   dropdownAberto: number | null = null;
   alertaVisivel = false;
   mensagemAlerta = '';
   paginaAtual = 1;
   tarefasPorPagina = 3;
+  tarefas: Tarefa[] = [];
+
+  constructor(private tarefaService: TarefaService) {}
+
+  ngOnInit() {
+    this.tarefaService.tarefas$.subscribe((tarefas) => {
+      this.tarefas = tarefas;
+    });
+  }
+
+  excluirTarefa(id: number) {
+    this.tarefaService.removerTarefa(id);
+    this.mensagemAlerta = 'Tarefa excluída com sucesso!';
+    this.alertaVisivel = true;
+    setTimeout(() => (this.alertaVisivel = false), 3000);
+  }
+
+  alterarStatus(id: number, status: string) {
+    this.tarefaService.alterarStatus(id, status);
+    this.mensagemAlerta = 'Status da Tarefa editado com sucesso!';
+    this.alertaVisivel = true;
+    setTimeout(() => (this.alertaVisivel = false), 3000);
+  }
 
   get tarefasPaginadas() {
     const inicio = (this.paginaAtual - 1) * this.tarefasPorPagina;
@@ -57,26 +68,8 @@ export class TabelaComponent {
     if (this.paginaAtual < this.totalPaginas) this.paginaAtual++;
   }
 
-  
-
-  excluirTarefa(id: number) {
-    this.tarefas = this.tarefas.filter((t) => t.id !== id);
-    this.mensagemAlerta = 'Tarefa excluída com sucesso!';
-    this.alertaVisivel = true;
-    setTimeout(() => (this.alertaVisivel = false), 3000);
-  }
-
   toggleDropdown(id: number) {
     this.dropdownAberto = this.dropdownAberto === id ? null : id;
-  }
-
-  alterarStatus(id: number, novoStatus: string) {
-    const tarefa = this.tarefas.find((t) => t.id === id);
-    if (tarefa) tarefa.status = novoStatus.toLowerCase();
-    this.dropdownAberto = null;
-    this.mensagemAlerta = 'Status da Tarefa editado com sucesso!';
-    this.alertaVisivel = true;
-    setTimeout(() => (this.alertaVisivel = false), 3000);
   }
 
   @HostListener('document:click', ['$event'])

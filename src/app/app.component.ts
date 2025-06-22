@@ -18,9 +18,9 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       this.router.events.subscribe(event => {
-        if (event instanceof NavigationEnd) {
+        if (event instanceof NavigationEnd) { 
           const url = event.urlAfterRedirects;
-          if (url === '/' || url.startsWith('/listar/componentes')) {
+          if (url === '/' || url.startsWith('/registrar')) {
             document.body.classList.add('bg-gray-100');
           } else {
             document.body.classList.remove('bg-gray-100');
