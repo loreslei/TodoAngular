@@ -1,10 +1,11 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AlertaComponent } from "../alert/alert.component";
 
 @Component({
   selector: 'app-tabela',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AlertaComponent],
   templateUrl: './tabela.component.html',
   styleUrls: ['./tabela.component.css'],
 })
@@ -19,12 +20,13 @@ export class TabelaComponent {
     { id: 7, descricao: 'Tarefa 7', status: 'Em Andamento' },
     { id: 8, descricao: 'Tarefa 8', status: 'Pendente' },
     { id: 9, descricao: 'Tarefa 9', status: 'Pendente' },
-    { id: 10, descricao: 'Tarefa 10', status: 'Concluído' }
+    { id: 10, descricao: 'Tarefa 10', status: 'Concluído' },
   ];
 
   statusOptions = ['Pendente', 'Em Andamento', 'Concluído'];
   dropdownAberto: number | null = null;
-
+  alertaVisivel = false;
+  mensagemAlerta = '';
   paginaAtual = 1;
   tarefasPorPagina = 3;
 
@@ -55,11 +57,13 @@ export class TabelaComponent {
     if (this.paginaAtual < this.totalPaginas) this.paginaAtual++;
   }
 
+  
+
   excluirTarefa(id: number) {
-    this.tarefas = this.tarefas.filter(t => t.id !== id);
-    if (this.paginaAtual > this.totalPaginas) {
-      this.paginaAtual = this.totalPaginas;
-    }
+    this.tarefas = this.tarefas.filter((t) => t.id !== id);
+    this.mensagemAlerta = 'Tarefa excluída com sucesso!';
+    this.alertaVisivel = true;
+    setTimeout(() => (this.alertaVisivel = false), 3000);
   }
 
   toggleDropdown(id: number) {
@@ -67,9 +71,12 @@ export class TabelaComponent {
   }
 
   alterarStatus(id: number, novoStatus: string) {
-    const tarefa = this.tarefas.find(t => t.id === id);
+    const tarefa = this.tarefas.find((t) => t.id === id);
     if (tarefa) tarefa.status = novoStatus.toLowerCase();
     this.dropdownAberto = null;
+    this.mensagemAlerta = 'Status da Tarefa editado com sucesso!';
+    this.alertaVisivel = true;
+    setTimeout(() => (this.alertaVisivel = false), 3000);
   }
 
   @HostListener('document:click', ['$event'])
@@ -81,7 +88,10 @@ export class TabelaComponent {
   }
 
   formatarStatus(status: string) {
-    const normalized = status.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    const normalized = status
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
     switch (normalized) {
       case 'concluido':
         return 'bg-green-500/20 text-green-900';
