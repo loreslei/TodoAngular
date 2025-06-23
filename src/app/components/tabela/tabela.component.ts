@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AlertaComponent } from '../alert/alert.component';
 import { TarefaService, Tarefa } from '../../services/tarefa.service';
+import { AtualizacaoService } from '../../services/atualizacao.service';
 
 @Component({
   selector: 'app-tabela',
@@ -19,10 +20,18 @@ export class TabelaComponent implements OnInit {
   tarefasPorPagina = 3;
   tarefas: Tarefa[] = [];
 
-  constructor(private tarefaService: TarefaService) {}
+  constructor(
+    private tarefaService: TarefaService,
+    private atualizacaoService: AtualizacaoService 
+  ) {}
 
   ngOnInit() {
     this.carregarTarefas();
+
+    
+    this.atualizacaoService.atualizarTarefas$.subscribe(() => {
+      this.carregarTarefas();
+    });
   }
 
   carregarTarefas() {
