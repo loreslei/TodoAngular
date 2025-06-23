@@ -15,8 +15,8 @@ export class TarefaService {
   constructor(private http: HttpClient) {}
 
   getTarefas(): Observable<Tarefa[]> {
-    return this.http.get<Tarefa[]>(`${this.baseUrl}`);
-  }
+  return this.http.get<Tarefa[]>(`${this.baseUrl}`, { params: { t: Date.now().toString() } });
+}
 
   removerTarefa(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
