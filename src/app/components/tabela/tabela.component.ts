@@ -36,9 +36,11 @@ export class TabelaComponent implements OnInit {
 
   carregarTarefas() {
     this.tarefaService.getTarefas().subscribe((tarefas) => {
+      console.log('Tarefas recebidas:', tarefas);
       this.tarefas = tarefas;
     });
   }
+
 
   excluirTarefa(id: number) {
     this.tarefaService.removerTarefa(id).subscribe(() => {
