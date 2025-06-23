@@ -10,7 +10,7 @@ import { TarefaService, Tarefa } from '../../services/tarefa.service';
   templateUrl: './tabela.component.html',
   styleUrls: ['./tabela.component.css'],
 })
-export class TabelaComponent implements OnInit{
+export class TabelaComponent implements OnInit {
   statusOptions = ['Pendente', 'Em Andamento', 'Concluído'];
   dropdownAberto: number | null = null;
   alertaVisivel = false;
@@ -22,23 +22,32 @@ export class TabelaComponent implements OnInit{
   constructor(private tarefaService: TarefaService) {}
 
   ngOnInit() {
-    this.tarefaService.tarefas$.subscribe((tarefas) => {
+    this.carregarTarefas();
+  }
+
+  carregarTarefas() {
+    this.tarefaService.getTarefas().subscribe((tarefas) => {
       this.tarefas = tarefas;
     });
   }
 
   excluirTarefa(id: number) {
-    this.tarefaService.removerTarefa(id);
-    this.mensagemAlerta = 'Tarefa excluída com sucesso!';
-    this.alertaVisivel = true;
-    setTimeout(() => (this.alertaVisivel = false), 3000);
+    this.tarefaService.removerTarefa(id).subscribe(() => {
+      this.mensagemAlerta = 'Tarefa excluída com sucesso!';
+      this.alertaVisivel = true;
+      this.tarefas = this.tarefas.filter(t => t.id !== id);
+      setTimeout(() => (this.alertaVisivel = false), 3000);
+    });
   }
 
   alterarStatus(id: number, status: string) {
-    this.tarefaService.alterarStatus(id, status);
-    this.mensagemAlerta = 'Status da Tarefa editado com sucesso!';
-    this.alertaVisivel = true;
-    setTimeout(() => (this.alertaVisivel = false), 3000);
+    this.tarefaService.alterarStatus(id, status).subscribe(() => {
+      const tarefa = this.tarefas.find(t => t.id === id);
+      if (tarefa) tarefa.status = status;
+      this.mensagemAlerta = 'Status da Tarefa editado com sucesso!';
+      this.alertaVisivel = true;
+      setTimeout(() => (this.alertaVisivel = false), 3000);
+    });
   }
 
   get tarefasPaginadas() {

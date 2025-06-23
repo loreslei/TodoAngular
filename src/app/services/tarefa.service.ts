@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 export interface Tarefa {
   id: number;
@@ -9,29 +10,25 @@ export interface Tarefa {
 
 @Injectable({ providedIn: 'root' })
 export class TarefaService {
-  private tarefasIniciais: Tarefa[] = [
-    { id: 1, descricao: 'Tarefa 1', status: 'pendente' },
-    { id: 2, descricao: 'Tarefa 2', status: 'em andamento' },
-    { id: 3, descricao: 'Tarefa 3', status: 'concluído' }
-  ];
+  private baseUrl = "https://back-spring-todo.onrender.com/api/tarefas";
 
-  private tarefasSubject = new BehaviorSubject<Tarefa[]>(this.tarefasIniciais);
-  tarefas$ = this.tarefasSubject.asObservable();
+  constructor(private http: HttpClient) {}
 
-  adicionarTarefa(tarefa: Tarefa) {
-    const tarefasAtualizadas = [...this.tarefasSubject.value, tarefa];
-    this.tarefasSubject.next(tarefasAtualizadas);
+  getTarefas(): Observable<Tarefa[]> {
+    return this.http.get<Tarefa[]>(`${this.baseUrl}`);
   }
 
-  removerTarefa(id: number) {
-    const atualizadas = this.tarefasSubject.value.filter(t => t.id !== id);
-    this.tarefasSubject.next(atualizadas);
+  adicionarTarefa(tarefa: Tarefa): Observable<Tarefa> {
+    return this.http.post<Tarefa>(`${this.baseUrl}`, tarefa);
   }
 
-  alterarStatus(id: number, status: string) {
-    const atualizadas = this.tarefasSubject.value.map(t =>
-      t.id === id ? { ...t, status } : t
-    );
-    this.tarefasSubject.next(atualizadas);
+  alterarStatus(id: number, status: string): Observable<Tarefa> {
+    return this.http.put<Tarefa>(`${this.baseUrl}/${id}`, { status });
+  }
+
+  removerTarefa(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
+
+
