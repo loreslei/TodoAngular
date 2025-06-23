@@ -49,7 +49,7 @@
         
                     <td class="p-4 border-b border-slate-200 relative">
                       <button (click)="toggleDropdown(tarefa.id)"
-                        class="dropdown-toggle h-10 w-10 flex items-center justify-center rounded-lg hover:bg-slate-900/10 relative">
+                        class="cursor-pointer dropdown-toggle h-10 w-10 flex items-center justify-center rounded-lg hover:bg-slate-900/10 relative">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
                           class="w-4 h-4 text-slate-900">
                           <path
@@ -71,7 +71,7 @@
         
                     <td class="p-4 border-b border-slate-200">
                       <button (click)="excluirTarefa(tarefa.id)"
-                        class="h-10 w-10 flex items-center justify-center rounded-lg text-slate-900 hover:bg-red-100 hover:text-red-900">
+                        class="cursor-pointer h-10 w-10 flex items-center justify-center rounded-lg text-slate-900 hover:bg-red-100 hover:text-red-900">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="currentColor"
                           stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
                           <path d="M3 6h18" />
@@ -93,11 +93,11 @@
               </p>
               <div class="flex gap-1">
                 <button (click)="anterior()" [disabled]="paginaAtual === 1"
-                  class="rounded border border-slate-300 py-2.5 px-3 text-xs font-semibold text-slate-600 hover:opacity-75 disabled:opacity-50">
+                  class="enabled:cursor-pointer rounded border border-slate-300 py-2.5 px-3 text-xs font-semibold text-slate-600 hover:opacity-75 disabled:opacity-50">
                   Anterior
                 </button>
                 <button (click)="proxima()" [disabled]="paginaAtual === totalPaginas"
-                  class="rounded border border-slate-300 py-2.5 px-3 text-xs font-semibold text-slate-600 hover:opacity-75 disabled:opacity-50">
+                  class="enabled:cursor-pointer rounded border border-slate-300 py-2.5 px-3 text-xs font-semibold text-slate-600 hover:opacity-75 disabled:opacity-50">
                   Próxima
                 </button>
               </div>
