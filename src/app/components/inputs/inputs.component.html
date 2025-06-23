@@ -1,6 +1,7 @@
 <app-alert class="block max-w-[89] md:w-89 mx-auto" *ngIf="alertaVisivel" [mensagem]="mensagemAlerta"></app-alert>
 <div class="w-screen flex justify-center">
-    <div class="max-w-[89] md:w-89 flex flex-col justify-center items-center bg-white shadow-md rounded-lg space-y-6 p-5 pb-8">
+    <div
+        class="max-w-[89] md:w-89 flex flex-col justify-center items-center bg-white shadow-md rounded-lg space-y-6 p-5 pb-8">
         <h1 class="text-xl text-center text-slate-800 font-semibold">Adicione uma Tarefa 📝</h1>
         <form action="" (submit)="adicionarTarefa($event)">
             <div class="text-slate-600/80 text-sm flex flex-col justify-center items-center space-y-4">
@@ -41,22 +42,22 @@
                         <select
                             class="pl-8 p-1 border-1 border-slate-400/40 rounded w-full focus:outline-pink-500 custom-select"
                             name="status" id="status">
-                            <option value="Pendente">Pendente</option>
-                            <option value="Em Andamento">Em Andamento</option>
-                            <option value="Concluído">Concluído</option>
+                            <option value="PENDENTE">Pendente</option>
+                            <option value="EM_ANDAMENTO">Em Andamento</option>
+                            <option value="CONCLUIDO">Concluído</option>
                         </select>
 
                         <div class="absolute right-2 top-1.5 h-4 w-4 pointer-events-none custom-arrow-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-chevron-down-icon lucide-chevron-down">
                                 <path d="m6 9 6 6 6-6" />
                             </svg>
                         </div>
                     </div>
                 </div>
 
-                <button type="submit" 
+                <button type="submit"
                     class="bg-pink-100 w-50 mx-auto mt-2
                 border-1 font-medium border-pink-400 h-10 text-pink-500 px-3 rounded transition duration-300 cursor-pointer hover:border-pink-500 hover:bg-pink-200 text-sm">Adicionar</button>
             </div>

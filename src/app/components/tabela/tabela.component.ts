@@ -89,20 +89,25 @@ export class TabelaComponent implements OnInit {
     }
   }
 
+  formatarTextoStatus(status: string) {
+  return status.replace(/_/g, ' ');
+}
+
+
   formatarStatus(status: string) {
-    const normalized = status
-      .toLowerCase()
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '');
-    switch (normalized) {
-      case 'concluido':
-        return 'bg-green-500/20 text-green-900';
-      case 'em andamento':
-        return 'bg-yellow-100 text-yellow-800';
-      case 'pendente':
-        return 'bg-red-100 text-red-800';
-      default:
-        return 'bg-gray-100 text-gray-800';
-    }
+  const normalized = status
+    .toLowerCase()              
+    .normalize('NFD')            
+    .replace(/[\u0300-\u036f]/g, '') 
+
+  switch (normalized) {
+    case 'concluido':
+      return 'bg-green-500/20 text-green-900';
+    case 'pendente':
+      return 'bg-red-100 text-red-800';
+    default:
+      return 'bg-yellow-100 text-yellow-800';
   }
+}
+
 }

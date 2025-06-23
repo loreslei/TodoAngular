@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AlertaComponent } from '../alert/alert.component';
 import { NgIf } from '@angular/common';
-import { TarefaService } from '../../services/tarefa.service';
+import { Tarefa, TarefaService } from '../../services/tarefa.service';
 
 @Component({
   selector: 'app-inputs',
@@ -20,22 +20,35 @@ export class InputsComponent {
     event.preventDefault();
 
     const form = event.target as HTMLFormElement;
-    const descricaoInput = form.elements.namedItem('tarefa') as HTMLInputElement;
+    const descricaoInput = form.elements.namedItem(
+      'tarefa'
+    ) as HTMLInputElement;
     const statusSelect = form.elements.namedItem('status') as HTMLSelectElement;
 
     const descricao = descricaoInput.value.trim();
-    const status = statusSelect.value.toLowerCase();
+    const status = statusSelect.value;
 
     if (!descricao) return;
 
-    const novaTarefa = { id: 0, descricao, status }; // ID será ignorado pelo back
+    const novaTarefa = { descricao, status };
 
-    this.tarefaService.adicionarTarefa(novaTarefa).subscribe(() => {
-      this.mensagemAlerta = 'Tarefa adicionada com sucesso!';
-      this.alertaVisivel = true;
-      descricaoInput.value = '';
-      statusSelect.value = 'Pendente';
-      setTimeout(() => (this.alertaVisivel = false), 3000);
-    });
+    this.tarefaService.adicionarTarefa(novaTarefa).subscribe(
+      () => {
+        this.mensagemAlerta = 'Tarefa adicionada com sucesso!';
+        this.alertaVisivel = true;
+        descricaoInput.value = '';
+        statusSelect.value = 'PENDENTE';
+        setTimeout(() => {
+          this.alertaVisivel = false;
+          window.location.reload();
+        }, 3000);
+      },
+      (err) => {
+        this.mensagemAlerta = 'Erro ao adicionar tarefa.';
+        this.alertaVisivel = true;
+        setTimeout(() => (this.alertaVisivel = false), 3000);
+        console.error(err);
+      }
+    );
   }
 }
