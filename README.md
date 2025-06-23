@@ -1,59 +1,69 @@
-# Todo
+# 📝 To-Do-List com Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.8.
+Este é o guia para configurar e executar o projeto frontend da aplicação, construído com Angular.
 
-## Development server
+## 📋 Pré-requisitos
 
-To start a local development server, run:
+Antes de começar, certifique-se de que você tem os seguintes requisitos instalados e configurados:
 
-```bash
-ng serve
-```
+* **Backend**: O projeto [Back-Spring-Todo](https://github.com/loreslei/Back-Spring-Todo) deve estar instalado e em execução.
+* **Node.js**: Essencial para o ambiente de execução.
+* **Angular CLI**: A interface de linha de comando do Angular.
+* **Git**: Para controle de versão.
+* **Navegador Web**: Um navegador de sua preferência (ex: Chrome, Firefox, Opera, Brave).
+* **IDE**: Um ambiente de desenvolvimento integrado (ex: VSCode, Webstorm).
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🚀 Instalação e Execução Local
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Para clonar e executar o projeto localmente, siga os passos abaixo no seu terminal ou prompt de comando.
 
-```bash
-ng generate component component-name
-```
+1.  **Clone o repositório:**
+    ```bash
+    git clone https://github.com/loreslei/TodoAngular.git
+    ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+2.  **Navegue até o diretório do projeto:**
+    ```bash
+    cd TodoAngular
+    ```
 
-```bash
-ng generate --help
-```
+3.  **(Opcional) Abra no VSCode:**
+    Se você utiliza o Visual Studio Code, execute o comando abaixo para abrir o projeto. Caso contrário, abra-o em sua IDE de preferência.
+    ```bash
+    code .
+    ```
+--- 
 
-## Building
+## 💻 Servidor de Desenvolvimento
 
-To build the project run:
+Siga os passos abaixo para instalar as dependências e iniciar a aplicação.
+
+1.  **Instale as dependências:**
+    No terminal, dentro da pasta do projeto, execute o comando para baixar todos os pacotes necessários.
+    ```bash
+    npm i
+    ```
+
+2.  **Inicie a aplicação:**
+    Após a instalação, execute o seguinte comando para iniciar o servidor de desenvolvimento.
+    ```bash
+    ng serve
+    ```
+
+Assim que o servidor estiver no ar, abra seu navegador e acesse `http://localhost:4200/`. A aplicação será recarregada automaticamente sempre que você salvar uma alteração nos arquivos do projeto.
+
+---
+
+## 🛠️ Build do Projeto
+
+Para compilar o projeto em uma versão otimizada para produção, execute:
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Os arquivos resultantes do build serão armazenados no diretório dist/.
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+*Este projeto foi gerado com **Angular CLI** versão 19.2.8.*
