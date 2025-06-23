@@ -10,7 +10,7 @@ export interface Tarefa {
 
 @Injectable({ providedIn: 'root' })
 export class TarefaService {
-  private baseUrl = "https://back-spring-todo.onrender.com/api/tarefas";
+  private baseUrl = 'https://back-spring-todo.onrender.com/api/tarefas';
 
   constructor(private http: HttpClient) {}
 
@@ -18,17 +18,35 @@ export class TarefaService {
     return this.http.get<Tarefa[]>(`${this.baseUrl}`);
   }
 
-  adicionarTarefa(tarefa: Tarefa): Observable<Tarefa> {
-    return this.http.post<Tarefa>(`${this.baseUrl}`, tarefa);
-  }
-
-  alterarStatus(id: number, status: string): Observable<Tarefa> {
-    return this.http.put<Tarefa>(`${this.baseUrl}/${id}`, { status });
-  }
-
   removerTarefa(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
+
+  private formatarStatusParaEnum(status: string): string {
+    const normalized = status
+      .toUpperCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+    if (normalized === 'EM ANDAMENTO') return 'EM_ANDAMENTO';
+    return normalized; 
+  }
+
+  adicionarTarefa(tarefa: Omit<Tarefa, 'id'>): Observable<Tarefa> {
+  const tarefaFormatada = {
+    ...tarefa,
+    status: this.formatarStatusParaEnum(tarefa.status),
+  };
+  return this.http.post<Tarefa>(this.baseUrl, tarefaFormatada);
 }
 
-
+  alterarStatus(id: number, status: string): Observable<Tarefa> {
+    const statusParam = status
+      .toUpperCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/\s+/g, '_');
+    return this.http.patch<Tarefa>(`${this.baseUrl}/${id}/status`, null, {
+      params: { status: statusParam },
+    });
+  }
+}
