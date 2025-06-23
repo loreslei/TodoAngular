@@ -11,29 +11,38 @@ import { TarefaService } from '../../services/tarefa.service';
 })
 export class InputsComponent {
 
-  descricao = '';
-  status = 'Pendente';
+   alertaVisivel = false;
+  mensagemAlerta = '';
 
   constructor(private tarefaService: TarefaService) {}
 
-  adicionarTarefa(event: SubmitEvent) {
-    if (!this.descricao.trim()) return;
+  adicionarTarefa(event: Event) {
+    event.preventDefault(); 
+
+    const form = event.target as HTMLFormElement;
+
+    
+    const descricaoInput = form.elements.namedItem('tarefa') as HTMLInputElement;
+    const statusSelect = form.elements.namedItem('status') as HTMLSelectElement;
+
+    const descricao = descricaoInput.value.trim();
+    const status = statusSelect.value;
+
+    if (!descricao) return;
 
     this.tarefaService.adicionarTarefa({
-      id: Date.now(), 
-      descricao: this.descricao,
-      status: this.status.toLowerCase()
+      id: Date.now(),
+      descricao,
+      status: status.toLowerCase()
     });
 
-    this.descricao = '';
-    this.status = 'Pendente';
+    
+    descricaoInput.value = '';
+    statusSelect.value = 'Pendente';
+
+    
     this.mensagemAlerta = 'Tarefa adicionada com sucesso!';
     this.alertaVisivel = true;
-    setTimeout(() => (this.alertaVisivel = false), 3000);
-    event.preventDefault();
+    setTimeout(() => this.alertaVisivel = false, 3000);
   }
-
-  alertaVisivel = false;
-  mensagemAlerta = '';
-
 }
