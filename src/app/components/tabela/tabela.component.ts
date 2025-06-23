@@ -47,6 +47,7 @@ export class TabelaComponent implements OnInit {
       this.mensagemAlerta = 'Tarefa excluída com sucesso!';
       this.alertaVisivel = true;
       this.tarefas = this.tarefas.filter(t => t.id !== id);
+      this.carregarTarefas();
       setTimeout(() => (this.alertaVisivel = false), 3000);
     });
   }
@@ -57,6 +58,7 @@ export class TabelaComponent implements OnInit {
       if (tarefa) tarefa.status = status;
       this.mensagemAlerta = 'Status da Tarefa editado com sucesso!';
       this.alertaVisivel = true;
+      this.carregarTarefas();
       setTimeout(() => (this.alertaVisivel = false), 3000);
     });
   }

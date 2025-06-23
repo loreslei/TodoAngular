@@ -43,7 +43,7 @@ export class InputsComponent {
 
         
         this.atualizacaoService.solicitarAtualizacao();
-
+        
         setTimeout(() => {
           this.alertaVisivel = false;
         }, 3000);
