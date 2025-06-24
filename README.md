@@ -67,3 +67,12 @@ ng build
 Os arquivos resultantes do build serão armazenados no diretório dist/.
 
 *Este projeto foi gerado com **Angular CLI** versão 19.2.8.*
+
+
+## 🌐 Teste Rápido
+
+Para uma demonstração prática e fácil, você deve primeiro se certificar que a API está carregada no endpoint público hospedado no Render, depois é só clicar na interface hospedada na Vercel e pronto!
+
+* **URL de Produção:** [**https://back-spring-todo.onrender.com/api/tarefas**](https://back-spring-todo.onrender.com/api/tarefas)
+
+* **URL Vercel:** [**https://todo-angular-sable-two.vercel.app/**](https://todo-angular-sable-two.vercel.app/)
