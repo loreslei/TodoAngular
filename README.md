@@ -12,6 +12,7 @@ Antes de começar, certifique-se de que você tem os seguintes requisitos instal
 * **Git**: Para controle de versão.
 * **Navegador Web**: Um navegador de sua preferência (ex: Chrome, Firefox, Opera, Brave).
 * **IDE**: Um ambiente de desenvolvimento integrado (ex: VSCode, Webstorm).
+* **Clarity**: Uma conta Clarity
 
 ---
 
